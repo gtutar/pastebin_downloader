@@ -545,16 +545,24 @@ using namespace std;
                                 subString       = source,
                                 search          = "data-page=\"",
                                 searchEnd       = "\">";
+                        int     numberOfPages   = 0;
 
                         auto     pos      = findNthOccuranceInString(subString, (string &) search, countTotalOccurrancesInString(subString, search));
 
-                        subString               = makeSubString(source, pos+search.length()-1, subString.length());
+                        if(0 == pos){
+                            numberOfPages = 1;
+                        }
+                        else{
 
-                        int endPos              = findPositionOfAString(subString, searchEnd);
+                            subString               = makeSubString(source, pos+search.length()-1, subString.length());
 
-                        subString               = makeSubString(subString, NEXT, endPos+NEXT);
+                            int endPos              = findPositionOfAString(subString, searchEnd);
 
-                        int numberOfPages       = stoi(subString);
+                            subString               = makeSubString(subString, NEXT, endPos+NEXT);
+
+                            numberOfPages           = stoi(subString);
+
+                        }
 
                         return numberOfPages;
                     }
