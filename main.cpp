@@ -1,7 +1,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 /*                                                                                   coded by GTUTAR (github.com/gtutar)
- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄▄▄░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄▄▄░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄██████████▄▄░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄██████░█░██████▄░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄████████░█░████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -545,7 +545,7 @@ using namespace std;
                                 subString       = source,
                                 search          = "data-page=\"",
                                 searchEnd       = "\">";
-                        int     numberOfPages   = 0;
+                        int     numberOfPages;
 
                         auto     pos      = findNthOccuranceInString(subString, (string &) search, countTotalOccurrancesInString(subString, search));
 
@@ -803,7 +803,9 @@ using namespace std;
                                     chdir(entry.c_str());
 
                                     /* check bottom pagination */
-                                    int bottomPagination = checkBottomPagination((string&)subStringForSingleSlash) + NEXT;
+                                    int bottomPagination = checkBottomPagination((string&)subStringForSingleSlash);
+
+                                    if(bottomPagination > 5) bottomPagination = bottomPagination + NEXT;
 
                                     for(int i = 1; i <= bottomPagination; i++){
 
